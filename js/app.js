@@ -15,10 +15,12 @@ document.getElementById('submitBtn').addEventListener('click', (e) => {
         eventBrite.queryAPI(eventName, category)
             .then(data => {
                 const events = data.events.events;
+                // console.log(events);
+
                 // Check for events
                 if(events.length > 0) {
                     // Display events
-                    console.log(events);
+                    ui.displayEvents(events);
                 } else {
                     // No events - Display message
                     ui.displayMessage('No Events Found!', 'alert alert-info mt-4 text-center')

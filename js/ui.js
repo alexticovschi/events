@@ -9,6 +9,40 @@ class UI {
         // Display categories in <select>
         this.displayCategories();
 
+        // Select the results
+        this.result = document.getElementById('result');
+
+    }
+
+    // Display events in the UI
+    displayEvents(events) {
+        console.log(events)
+        // Build the template
+        let HTMLTemplate = '';
+
+        events.forEach(eventInfo => {
+            HTMLTemplate += `
+                <div class="col-md-4 mt-4 shadow p-3 mb-5 rounded">
+                    <div class="card">
+                        <div class="card-body">
+                            <img class="img-fluid mb-2" src="${eventInfo.logo !== null ? eventInfo.logo.url : ''}" />
+                        </div>
+                        <div class="card-body">
+                            <div class="card-text">
+                                <h4 class="text-center card-title">${eventInfo.name.text}</h4>
+                                <p class="lead text-info">Event Information: </p>
+                                <p>${eventInfo.description.text && eventInfo.description.text.substr(0,200)}...</p>
+                                <span class="badge badge-light">Date & Time: ${eventInfo.start.local}</span>
+                                
+                                <a href="${eventInfo.url}" target="_blank" class="btn cardBtn btn-warning btn-block mt-4">View Event</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }); 
+
+        this.result.innerHTML = HTMLTemplate;
     }
 
     // Display the categories
