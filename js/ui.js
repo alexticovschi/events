@@ -29,4 +29,35 @@ class UI {
             })
             .catch(error => console.log(error));
     }
+
+    // Display message
+    displayMessage(message, classes) {
+        // Create a div
+        const div = document.createElement('div');
+        div.className = classes;
+        
+        // Add the text
+        div.appendChild(document.createTextNode(message));
+
+        // Insert into HTML
+        const searchDiv = document.querySelector('#search-events');
+        searchDiv.appendChild(div);
+
+        // Remove alert after 3 seconds
+        setTimeout(() => {
+            this.removeMessage(div, 1500);
+        }, 3000)
+    }
+
+    // Remove message
+    removeMessage( el, speed ) {
+        const seconds = speed/1000;
+        el.style.transition = "opacity "+seconds+"s ease";
+    
+        el.style.opacity = 0;
+        setTimeout(function() {
+            el.parentNode.removeChild(el);
+        }, speed);
+    }
+    
 }
