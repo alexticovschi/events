@@ -12,7 +12,19 @@ document.getElementById('submitBtn').addEventListener('click', (e) => {
 
     if(eventName !== '') {
         // Query Eventbrite API
-        
+        eventBrite.queryAPI(eventName, category)
+            .then(data => {
+                const events = data.events.events;
+                // Check for events
+                if(events.length > 0) {
+                    // Display events
+                    console.log(events);
+                } else {
+                    // No events - Display message
+                    ui.displayMessage('No Events Found!', 'alert alert-info mt-4 text-center')
+                }
+ 
+            });
     } else {
         // Display message to user 
         ui.displayMessage('Please add an Event or City', 'alert alert-danger mt-4 text-center')
